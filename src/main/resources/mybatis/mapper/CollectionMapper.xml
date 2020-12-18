@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.house.mapper.CollectionMapper">
+
+    <resultMap type="com.house.entity.House" id="BasicMap">
+        <id column="h_id" jdbcType="INTEGER" property="houseId"/>
+        <result column="house_desc" jdbcType="VARCHAR" property="houseDesc"/>
+        <result column="house_model" jdbcType="VARCHAR" property="houseModel"/>
+        <result column="house_area" jdbcType="VARCHAR" property="houseArea"/>
+        <result column="house_floor" jdbcType="VARCHAR" property="houseFloor"/>
+        <result column="house_type" jdbcType="VARCHAR" property="houseType"/>
+        <result column="house_price" jdbcType="VARCHAR" property="housePrice"/>
+        <result column="house_address" jdbcType="VARCHAR" property="houseAddress"/>
+        <result column="house_image" jdbcType="VARCHAR" property="houseImage"/>
+        <result column="community_name" jdbcType="VARCHAR" property="communityName"/>
+        <result column="house_linkman" jdbcType="VARCHAR" property="houseLinkMan"/>
+        <result column="house_oriented" jdbcType="VARCHAR" property="houseOriented"/>
+        <result column="house_details_img" jdbcType="VARCHAR" property="houseDetailsImg"/>
+        <result column="publisher" jdbcType="VARCHAR" property="publisher"/>
+        <result column="publish_time" jdbcType="VARCHAR" property="publishTime"/>
+    </resultMap>
+
+    <resultMap type="com.house.entity.UserCollection" id="UserCollectionMap">
+        <id column="id" jdbcType="INTEGER" property="collectionId"/>
+        <result column="h_id" jdbcType="INTEGER" property="houseId"/>
+        <result column="order_time" jdbcType="VARCHAR" property="orderTime"/>
+        <result column="order_user" jdbcType="VARCHAR" property="orderUser"/>
+        <result column="house_desc" jdbcType="VARCHAR" property="houseDesc"/>
+        <result column="house_model" jdbcType="VARCHAR" property="houseModel"/>
+        <result column="house_area" jdbcType="VARCHAR" property="houseArea"/>
+        <result column="house_floor" jdbcType="VARCHAR" property="houseFloor"/>
+        <result column="house_type" jdbcType="VARCHAR" property="houseType"/>
+        <result column="house_price" jdbcType="INTEGER" property="housePrice"/>
+        <result column="house_address" jdbcType="INTEGER" property="houseAddress"/>
+        <result column="house_image" jdbcType="INTEGER" property="houseImage"/>
+        <result column="community_name" jdbcType="INTEGER" property="communityName"/>
+        <result column="house_linkman" jdbcType="INTEGER" property="houseLinkMan"/>
+        <result column="house_oriented" jdbcType="INTEGER" property="houseOriented"/>
+    </resultMap>
+
+    <select id="getCollectionByUserIdAndHouseId" resultType="java.lang.Integer">
+        select count(*)
+        from t_collection
+        where user_id = #{userId} and house_id = #{houseId};
+    </select>
+
+    <select id="getCollectedHouse" resultMap="BasicMap">
+        select *
+        from t_house,t_collection
+        where t_house.h_id = t_collection.house_id and t_collection.user_id = #{userId};
+    </select>
+
+    <select id="findAllCollection" parameterType="com.house.entity.Page" resultMap="UserCollectionMap">
+        select *
+        from t_house h,
+             t_collection c
+        where h.h_id = c.house_id
+          and c.user_id = #{pageObj.userId}
+        limit #{pageObj.page},#{pageObj.limit};
+    </select>
+
+    <select id="getCollectionCount" resultType="java.lang.Integer">
+        select count(*)
+        from t_collection
+        where user_id = #{userId};
+    </select>
+
+    <insert id="insertCollection">
+        insert into t_collection(user_id,house_id)
+        values (#{userId},#{houseId});
+    </insert>
+
+    <delete id="deleteCollection">
+        delete from t_collection
+        where user_id = #{userId} and house_id = #{houseId};
+    </delete>
+
+    <delete id="deleteCollectionById">
+        delete from t_collection
+        where id = #{collectionId};
+    </delete>
+
+
+</mapper>

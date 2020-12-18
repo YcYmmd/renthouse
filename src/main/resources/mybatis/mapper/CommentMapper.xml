@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.house.mapper.CommentMapper">
+
+    <insert id="insertComment">
+        insert into t_comment(user_id,house_id,comment_content)
+        values(#{userId},#{houseId},#{commentContent});
+    </insert>
+
+    <select id="getCommentList" resultType="com.house.dto.UserCommentData">
+        select u_id userId,u_name userName,comment_content commentContent,u_avatar userAvatar,t_comment.id commentId
+        from t_users,t_comment
+        where t_users.u_id = t_comment.user_id and t_comment.house_id = #{houseId};
+    </select>
+
+    <delete id="delComment">
+        delete from t_comment
+        where id = #{commentId};
+    </delete>
+
+
+</mapper>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.house.mapper.NewsMapper">
+
+    <resultMap id="baseMap" type="com.house.entity.News">
+        <id column="n_id" jdbcType="INTEGER" property="newsId"/>
+        <result column="content" jdbcType="VARCHAR" property="content"/>
+        <result column="admin_id" jdbcType="INTEGER" property="adminId"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="img" jdbcType="VARCHAR" property="image"/>
+        <result column="detail_imgs" jdbcType="VARCHAR" property="detailImages"/>
+    </resultMap>
+
+    <insert id="addNews">
+        insert into t_news(admin_id,title,content,img,detail_imgs)
+        values(#{news.adminId},#{news.title},#{news.content},#{news.image},#{news.detailImages});
+    </insert>
+
+    <delete id="deleteNewsById">
+        delete from t_news
+        where n_id = #{newsId};
+    </delete>
+
+    <update id="updateNews" parameterType="com.house.entity.News">
+        update t_news
+        set title = #{news.title},
+            content = #{news.content},
+            img = #{news.image},
+            detail_imgs = #{news.detailImages}
+        where n_id = #{news.newsId};
+    </update>
+
+    <select id="findNewsDetailsById" resultMap="baseMap">
+        select *
+        from t_news
+        where n_id = #{newsId};
+    </select>
+
+    <select id="getBriefImageByNewsId" resultType="java.lang.String">
+        select img
+        from t_news
+        where n_id = #{newsId};
+    </select>
+
+    <select id="getDetailImagesByNewsId" resultType="java.lang.String">
+        select detail_imgs
+        from t_news
+        where n_id = #{newsId};
+    </select>
+
+    <select id="findAllNews" resultMap="baseMap" parameterType="com.house.entity.Page">
+        select *
+        from t_news
+        limit #{page.page},#{page.limit};
+    </select>
+
+    <select id="getNewsCountByAdminId" resultType="java.lang.Integer">
+        select count(*)
+        from t_news
+        where admin_id = #{adminId};
+    </select>
+
+    <select id="findNewsByLike" parameterType="string" resultMap="baseMap">
+        select *
+        from t_news
+        where title like concat("%",#{keywords},"%")
+    </select>
+
+</mapper>
