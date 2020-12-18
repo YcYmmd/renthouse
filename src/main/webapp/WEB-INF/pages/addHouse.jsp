@@ -81,7 +81,7 @@
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">房屋朝向</label>
+            <label class="layui-form-label">房间朝向</label>
             <div class="layui-input-block">
                 <select name="houseOriented" lay-verify="required">
                     <option value=""></option>
