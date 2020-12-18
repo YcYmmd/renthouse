@@ -15,9 +15,9 @@ import java.util.UUID;
 public class ConstantPropertiesUtil {
     public static String END_POINT = "oss-cn-beijing.aliyuncs.com";
     ;
-    public static String ACCESS_KEY_ID = "LTAI4G3pWVHU1X9AaJ1yAz6s";
-    public static String ACCESS_KEY_SECRET = "JjUSVsPdiTTdvmD3gHgEoB3dPcZ0OB";
-    public static String BUCKET_NAME = "ycymmd";
+    public static String ACCESS_KEY_ID = "输入你自己的id";
+    public static String ACCESS_KEY_SECRET = "输入你自己的secret";
+    public static String BUCKET_NAME = "输入你自己的bucket_name";
     public static String FILE_HOST;
 
     public static String uploadFileToOss(MultipartFile file) {
