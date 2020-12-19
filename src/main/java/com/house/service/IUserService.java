@@ -1,5 +1,6 @@
 package com.house.service;
 
+import com.house.dto.UserRegister;
 import com.house.entity.User;
 
 public interface IUserService {
@@ -17,7 +18,7 @@ public interface IUserService {
      * @param user user
      * @return user
      */
-    int register(User user);
+    int register(UserRegister userRegister);
 
     /**
      * 修改密码
@@ -38,4 +39,6 @@ public interface IUserService {
     int updateUserInfo(User user);
 
     String getAvatarByUserId(int userId);
+
+    User getUserByName(String userName);
 }

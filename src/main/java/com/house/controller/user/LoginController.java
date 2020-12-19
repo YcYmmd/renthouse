@@ -1,5 +1,6 @@
 package com.house.controller.user;
 
+import com.house.dto.UserRegister;
 import com.house.entity.User;
 import com.house.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,12 +63,15 @@ public class LoginController {
 
     @PostMapping("/register")
     @ResponseBody
-    public String register(User user) {
+    public String register(UserRegister userRegister) {
         int register;
         try {
-            register = mapper.register(user);
-            if (register > 0) {
-                return "OK";
+            User user1 = mapper.getUserByName(userRegister.getUserNameRegister());
+            if (user1 == null) {
+                register = mapper.register(userRegister);
+                if (register > 0) {
+                    return "OK";
+                }
             }
         } catch (Exception e) {
             return "FAIL";

@@ -1,5 +1,6 @@
 package com.house.mapper;
 
+import com.house.dto.UserRegister;
 import com.house.entity.User;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
@@ -17,10 +18,10 @@ public interface UserMapper {
     /**
      * 用户注册
      *
-     * @param user user
+     * @param userRegister userRegister 页面上的注册类
      * @return int
      */
-    int register(User user);
+    int register(UserRegister userRegister);
 
     /**
      * 修改密码
@@ -54,4 +55,6 @@ public interface UserMapper {
     *@return:
     */
     String getAvatarByUserId(@Param("userId") int userId);
+
+    User getUserByName(@Param("userName") String userName);
 }

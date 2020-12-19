@@ -107,14 +107,14 @@
                         <div class="layui-form-item">
                             <label class="layui-form-label">用户名</label>
                             <div class="layui-input-block">
-                                <input type="text" name="userName" required lay-verify="required" placeholder="请输入用户名"
+                                <input type="text" name="userNameRegister" required lay-verify="required" placeholder="请输入用户名"
                                        autocomplete="off" class="layui-input">
                             </div>
                         </div>
                         <div class="layui-form-item">
                             <label class="layui-form-label">密码</label>
                             <div class="layui-input-block">
-                                <input type="text" name="userPassword" required lay-verify="required"
+                                <input type="text" name="userPasswordRegister" required lay-verify="required"
                                        placeholder="请输入密码"
                                        autocomplete="off" class="layui-input">
                             </div>
@@ -175,7 +175,7 @@
         });
 
         $('.regist-btn').click(function () {
-            if ($("input[name='userName']").val() != "" && $("input[name='userPassword']").val() != "" && $("input[name='userPhoneNumber']").val() != "" && $("input[name='userNickName']").val() != "") {
+            if ($("input[name='userNameRegister']").val() != "" && $("input[name='userPasswordRegister']").val() != "" && $("input[name='userPhoneNumber']").val() != "" && $("input[name='userNickName']").val() != "") {
                 $.post("${pageContext.request.contextPath}/user/register", $('.form').serialize(), function (res) {
                     if (res === 'OK') {
                         layer.close(layer_index);
@@ -186,10 +186,6 @@
                     }
                 })
             } else {
-                console.log($("input[name='userName']").val());
-                console.log($("input[name='userPassword']").val());
-                console.log($("input[name='userPhoneNumber']").val());
-                console.log($("input[name='userNickName']").val());
                 layer.msg("请正确填写所有表单");
             }
         });

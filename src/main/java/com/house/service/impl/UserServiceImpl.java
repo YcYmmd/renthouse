@@ -1,5 +1,6 @@
 package com.house.service.impl;
 
+import com.house.dto.UserRegister;
 import com.house.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,8 +21,8 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public int register(User user) {
-        return mapper.register(user);
+    public int register(UserRegister userRegister) {
+        return mapper.register(userRegister);
     }
 
     @Override
@@ -42,5 +43,10 @@ public class UserServiceImpl implements IUserService {
     @Override
     public String getAvatarByUserId(int userId) {
         return mapper.getAvatarByUserId(userId);
+    }
+
+    @Override
+    public User getUserByName(String userName) {
+        return mapper.getUserByName(userName);
     }
 }
