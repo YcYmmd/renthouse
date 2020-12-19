@@ -46,12 +46,12 @@
     <div class="layui-header title">
         <div class="layui-container">
             <div class="layui-logo layui-pull-left">
-                <img src="${pageContext.request.contextPath }/img/logo.png" height="50px" alt="房屋租赁系统">
+                <img src="${pageContext.request.contextPath }/img/logo.png" height="50px" alt="YcY租房系统">
             </div>
             <c:if test="${not empty loginUser }">
                 <div class="personalCenter layui-pull-right">
                     <a href="${pageContext.request.contextPath}/user/home.html" target="_blank" style="color:#fff">
-                        <i class="layui-icon layui-icon-tree"></i> 个人中心</a>
+                        <i class="layui-icon layui-icon-about"></i> 个人中心</a>
                 </div>
             </c:if>
             <c:if test="${empty loginUser }">

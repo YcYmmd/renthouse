@@ -1,5 +1,6 @@
 package com.house.mapper;
 
+import com.github.pagehelper.PageInfo;
 import com.house.entity.House;
 import com.house.entity.Page;
 import org.apache.ibatis.annotations.Param;
@@ -64,20 +65,6 @@ public interface HouseMapper {
      */
     List<House> findHouseByLike(String keywords);
 
-    /**
-     * 降序查询
-     *
-     * @return list
-     */
-    List<House> findHouseOrderByDesc();
-
-    /**
-     * 升序查询
-     *
-     * @return list
-     */
-    List<House> findHouseOrderByAsc();
-
     int addHouseImagePath(@Param("imgPath") String imgPath);
 
     String getBriefImageByHouseId(@Param("houseId") int houseId);
@@ -103,4 +90,8 @@ public interface HouseMapper {
     int getAllHouseCountByUserNickName(@Param("userNickName") String userNickName);
 
     int getOrderByUserIdAndHouseId(@Param("userId") int userId, @Param("houseId") int id);
+
+    List<House> findHouseByLikeAsc(@Param("keywords") String keywords);
+
+    List<House> findHouseByLikeDesc(@Param("keywords") String keywords);
 }

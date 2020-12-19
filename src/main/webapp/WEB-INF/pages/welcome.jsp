@@ -33,8 +33,8 @@
 </head>
 <body>
 <div class="welcome">
-    <p><span class="layui-icon layui-icon-tree"></span></p>
-    <p class="wel-world">欢迎访问后台管理系统！</p>
+    <p><span class="layui-icon layui-icon-about"></span></p>
+    <p class="wel-world">欢迎使用后台管理系统！</p>
 </div>
 </body>
 </html>

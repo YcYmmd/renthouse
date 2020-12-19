@@ -63,20 +63,6 @@ public interface IHouseService {
      */
     List<House> findHouseByLike(String keywords);
 
-    /**
-     * 降序查询
-     *
-     * @return house list
-     */
-    List<House> findHouseOrderByDesc();
-
-    /**
-     * 升序序查询
-     *
-     * @return house list
-     */
-    List<House> findHouseOrderByAsc();
-
     int addHouseImgPath(String imgPath);
 
     String getBriefImageByHouseId(int houseId);
@@ -90,4 +76,8 @@ public interface IHouseService {
     PageInfo<House> getPageInfo(String keywords, Integer pageNum, Integer pageSize);
 
     int getOrderByUserIdAndHouseId(int userId, int id);
+
+    PageInfo<House> getPageInfoAsc(String keywords, Integer pageNum, Integer pageSize);
+
+    PageInfo<House> getPageInfoDesc(String keywords, Integer pageNum, Integer pageSize);
 }

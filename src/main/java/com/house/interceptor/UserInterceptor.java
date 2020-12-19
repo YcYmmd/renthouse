@@ -32,7 +32,7 @@ public class UserInterceptor implements HandlerInterceptor {
         }
 
         List<String> filterUserList = Arrays.asList("/index.html", "/user/login", "/user/register", "/detail.html",
-            "page1","/page2", "/priceAsc", "/priceDesc", "/admin/", "/admin/index.html", "/admin/adminAccess","/news/newsDetail");
+            "/page1","/page2", "/priceAsc", "/priceDesc", "/admin/", "/admin/index.html", "/admin/adminAccess","/news/newsDetail");
         for (String url : filterUserList) {
             if (requestUrl.contains(url)) {
                 return true;

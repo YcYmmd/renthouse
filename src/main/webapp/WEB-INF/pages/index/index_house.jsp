@@ -12,7 +12,7 @@
 <body>
 <!--内容开始-->
 <div class="list_control_bar layui-container">
-    <form action="/fuzzy" method="post" class="form-inline" role="form" style="float:left;">
+    <form action="/page2" method="post" class="form-inline" role="form" style="float:left;">
         <div class="form-group has-feedback">
             <div class="input-group">
                 <div class="input-group-addon">查询条件</div>

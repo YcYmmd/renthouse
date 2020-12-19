@@ -128,18 +128,43 @@
                   ) LIKE CONCAT("%", #{keywords}, "%") and house_examine = 1
     </select>
 
+    <!-- 条件搜索 -->
+    <select id="findHouseByLikeAsc" parameterType="string" resultMap="BasicMap">
+        SELECT *
+        FROM t_house h
+        WHERE CONCAT(
+                      h.community_name,
+                      h.house_desc,
+                      h.house_model
+                  ) LIKE CONCAT("%", #{keywords}, "%") and house_examine = 1
+        order by house_price asc
+    </select>
+
+    <!-- 条件搜索 -->
+    <select id="findHouseByLikeDesc" parameterType="string" resultMap="BasicMap">
+        SELECT *
+        FROM t_house h
+        WHERE CONCAT(
+                      h.community_name,
+                      h.house_desc,
+                      h.house_model
+                  ) LIKE CONCAT("%", #{keywords}, "%") and house_examine = 1
+        order by house_price desc
+    </select>
+
+
     <select id="findHouseOrderByDesc" resultMap="BasicMap">
         SELECT *
         FROM t_house h
-        ORDER BY house_price DESC
-        where house_examine = 1;
+        where house_examine = 1
+        ORDER BY house_price DESC;
     </select>
 
     <select id="findHouseOrderByAsc" resultMap="BasicMap">
         SELECT *
         FROM t_house h
-        ORDER BY house_price
-        where house_examine = 1;
+        where house_examine = 1
+        ORDER BY house_price;
     </select>
 
     <select id="getBriefImageByHouseId" resultType="java.lang.String">

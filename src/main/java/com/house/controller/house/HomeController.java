@@ -70,11 +70,15 @@ public class HomeController {
      * @return res
      */
     @GetMapping("/priceAsc")
-    public String findPriceAsc(HttpServletRequest request) {
-        List<House> findHomeInfo = service.findHouseOrderByAsc();
-        request.getSession().removeAttribute("House");
-        request.getSession().setAttribute("House", findHomeInfo);
-        return "index/index.jsp";
+    public String findPriceAsc(HttpServletRequest request,
+                               @RequestParam(value = "keyword", defaultValue = "") String keywords,
+                               @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
+                               @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
+                               ModelMap modelMap
+    ) {
+        PageInfo<House> pageInfo = service.getPageInfoAsc(keywords,pageNum,pageSize);
+        modelMap.addAttribute("pageInfo",pageInfo);
+        return "index/index_house.jsp";
     }
 
     /**
@@ -84,11 +88,15 @@ public class HomeController {
      * @return res
      */
     @GetMapping("/priceDesc")
-    public String findPriceDesc(HttpServletRequest request) {
-        List<House> findHomeInfo = service.findHouseOrderByDesc();
-        request.getSession().removeAttribute("House");
-        request.getSession().setAttribute("House", findHomeInfo);
-        return "index/index.jsp";
+    public String findPriceDesc(HttpServletRequest request,
+                                @RequestParam(value = "keyword", defaultValue = "") String keywords,
+                                @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
+                                @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
+                                ModelMap modelMap
+    ) {
+        PageInfo<House> pageInfo = service.getPageInfoDesc(keywords,pageNum,pageSize);
+        modelMap.addAttribute("pageInfo",pageInfo);
+        return "index/index_house.jsp";
     }
     @RequestMapping("/page1")
     public String findNewsByLike(HttpServletRequest request,

@@ -55,11 +55,6 @@ public class HouseServiceImpl implements IHouseService {
     }
 
     @Override
-    public List<House> findHouseOrderByAsc() {
-        return dao.findHouseOrderByAsc();
-    }
-
-    @Override
     public int addHouseImgPath(String imgPath) {
         return dao.addHouseImagePath(imgPath);
     }
@@ -97,7 +92,17 @@ public class HouseServiceImpl implements IHouseService {
     }
 
     @Override
-    public List<House> findHouseOrderByDesc() {
-        return dao.findHouseOrderByDesc();
+    public PageInfo<House> getPageInfoAsc(String keywords, Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<House> list = dao.findHouseByLikeAsc(keywords);
+        return new PageInfo<>(list);
     }
+
+    @Override
+    public PageInfo<House> getPageInfoDesc(String keywords, Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<House> list = dao.findHouseByLikeDesc(keywords);
+        return new PageInfo<>(list);
+    }
+
 }
