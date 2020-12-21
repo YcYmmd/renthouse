@@ -24,9 +24,9 @@
     <div>
         <div class="list_more">
             <ul class="layui-pull-right list-item">
-                <li class="click-this"><a href="${pageContext.request.contextPath }/index.html">默认排序</a></li>
-                <li><a href="${pageContext.request.contextPath }/priceAsc">价格升序</a></li>
-                <li><a href="${pageContext.request.contextPath }/priceDesc">价格降序</a></li>
+                <li class="click-this"><a href="${pageContext.request.contextPath }/page2.html">默认排序</a></li>
+                <li><a id="priceAsc" href="#">价格升序</a></li>
+                <li><a id="priceDesc" href="#">价格降序</a></li>
             </ul>
         </div>
     </div>
@@ -80,13 +80,20 @@
     </div>
 </section>
 <script src="${pageContext.request.contextPath }/jquery/jquery-2.1.1.min.js"></script>
-<script src="${pageContext.request.contextPath }/bootstrap/js/bootstrap.min.js"></script>
-<script src="${pageContext.request.contextPath }/jquery/jquery.pagination.js"></script>
 <script type="text/javascript">
     $(function () {
         // 调用后面声明的函数对页码导航条进行初始化
         initPagination();
     });
+
+    $("#priceAsc").click(function () {
+        window.location.href = "${pageContext.request.contextPath}/priceAsc";
+    });
+
+    $("#priceDesc").click(function () {
+        window.location.href = "${pageContext.request.contextPath}/priceDesc";
+    })
+
 
     // 生成页码导航条的函数
     function initPagination() {
@@ -113,12 +120,22 @@
         var pageNum = pageIndex + 1;
 
         // 跳转到对应的页面
-        window.location.href = "${pageContext.request.contextPath}/page2?pageNum=" + pageNum+"&keyword=${param.keyword}";
+        if (${requestScope.isAsc == true && requestScope.isDesc == false}) {
+            window.location.href = "${pageContext.request.contextPath}/priceAsc?pageNum=" + pageNum +"&keyword=${param.keyword}";
+        } else if (${requestScope.isAsc == false && requestScope.isDesc == true}) {
+            window.location.href = "${pageContext.request.contextPath}/priceDesc?pageNum=" + pageNum +"&keyword=${param.keyword}";
+        } else {
+            window.location.href = "${pageContext.request.contextPath}/page2?pageNum=" + pageNum+"&keyword=${param.keyword}";
+        }
 
         // 由于每一个页码按钮都是超链接，所以在这个函数最后取消超链接的默认行为
         return false;
     }
+
+
 </script>
+<script src="${pageContext.request.contextPath }/bootstrap/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath }/jquery/jquery.pagination.js"></script>
 </body>
 </html>
 

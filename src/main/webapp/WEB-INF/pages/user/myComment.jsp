@@ -4,15 +4,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>我的收藏</title>
+    <title>我的评论</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css">
 </head>
 <body>
 <div class="layui-fluid" style="margin-top: 40px;">
     <fieldset class="layui-elem-field layui-field-title">
-        <legend style="font-size: 26px">我的收藏信息</legend>
+        <legend style="font-size: 26px">我的评论信息</legend>
     </fieldset>
-    <table id="houseList" lay-filter="order"></table>
+    <table id="commentList" lay-filter="order"></table>
 </div>
 <script src="${pageContext.request.contextPath}/layui/layui.js"></script>
 <script>
@@ -23,29 +23,21 @@
             util = layui.util;
 
         let dt = table.render({
-            elem: "#houseList",
-            url: "${pageContext.request.contextPath}/collection/myCollectionInfo",
+            elem: "#commentList",
+            url: "${pageContext.request.contextPath}/comment/myComment",
             page: true,
             method: 'post',
             limit: 10,
             loading: true,
             cols: [[
-                {field: 'houseId', title: '房子序号', align: 'center'}
-                ,{field: 'collectionId', title: '收藏序号', align: 'center'}
-                , {field: 'houseDesc', title: '房屋详情', align: 'center'}
-                , {field: 'houseModel', title: '几室几厅', align: 'center'}
-                , {field: 'houseArea', title: '面积', align: 'center'}
-                , {field: 'houseFloor', title: '楼层', align: 'center'}
-                , {field: 'houseType', title: '出租方式', align: 'center'}
-                , {field: 'housePrice', title: '价格', align: 'center'}
-                , {field: 'houseAddress', title: '地址', align: 'center'}
-                , {field: 'houseLinkMan', title: '联系人', align: 'center'}
-                , {field: 'communityName', title: '小区名', align: 'center'}
-                , {field: 'houseOriented', title: '朝向', align: 'center'}
-                , {title: '操作', align: 'center', toolbar: "#tools",width:160}
+                {field: 'commentId', title: '序号', align: 'center'},
+                {field: 'commentContent',title: '评论内容', align: 'center'},
+                {field: 'commentHouseId',title: '房屋序号',align: 'center'},
+                {field: 'commentHouse',title: '房屋名称', align: 'center'},
+                , {title: '操作', align: 'center', toolbar: "#tools",width: '112'}
             ]],
-            done: function () {
-                $("[data-field='collectionId']").css('display','none');
+            done: function(res, curr, count){
+                $("[data-field=commentHouseId]").css('display','none');
             }
         });
 
@@ -56,12 +48,12 @@
             let currPage = dt.config.page.curr;
 
             if (layEvent === "view") {
-                window.open("${pageContext.request.contextPath}/detail.html?id="+data.houseId);
+                window.open("${pageContext.request.contextPath}/detail.html?id="+data.commentHouseId);
             }
 
             if (layEvent === 'delete') {
                 layer.confirm('确认删除当前数据吗？', {icon: 5, shade: 0.1}, function (index) {
-                    $.post("${pageContext.request.contextPath}/collection/cancelCollection", {collectionId: data.collectionId}, function (success) {
+                    $.post("${pageContext.request.contextPath}/comment/deleteComment", {commentId: data.commentId}, function (success) {
                         if (success === "OK") {
                             obj.del();
                             dt.reload({

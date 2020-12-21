@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.house.dto.CommentHouse;
+import com.house.dto.CommentHouseData;
 import com.house.service.IHouseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -103,6 +105,16 @@ public class HouseServiceImpl implements IHouseService {
         PageHelper.startPage(pageNum,pageSize);
         List<House> list = dao.findHouseByLikeDesc(keywords);
         return new PageInfo<>(list);
+    }
+
+    @Override
+    public List<CommentHouse> findMyComment(Page pageObj) {
+        return dao.findMyComment(pageObj);
+    }
+
+    @Override
+    public int getMyCommentCount(int userId) {
+        return dao.getMyCommentCount(userId);
     }
 
 }

@@ -1,6 +1,8 @@
 package com.house.mapper;
 
 import com.github.pagehelper.PageInfo;
+import com.house.dto.CommentHouse;
+import com.house.dto.CommentHouseData;
 import com.house.entity.House;
 import com.house.entity.Page;
 import org.apache.ibatis.annotations.Param;
@@ -94,4 +96,8 @@ public interface HouseMapper {
     List<House> findHouseByLikeAsc(@Param("keywords") String keywords);
 
     List<House> findHouseByLikeDesc(@Param("keywords") String keywords);
+
+    List<CommentHouse> findMyComment(@Param("page") Page pageObj);
+
+    int getMyCommentCount(@Param("userId") int userId);
 }

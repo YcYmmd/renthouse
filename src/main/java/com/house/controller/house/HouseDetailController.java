@@ -1,8 +1,11 @@
 package com.house.controller.house;
 
+import com.house.dto.CommentHouse;
+import com.house.dto.CommentHouseData;
 import com.house.dto.UserCommentData;
 import com.house.entity.House;
 import com.house.entity.NetResponse;
+import com.house.entity.Page;
 import com.house.entity.User;
 import com.house.service.ICollectionService;
 import com.house.service.ICommentService;
@@ -10,6 +13,7 @@ import com.house.service.IHouseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.annotation.RequestScope;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -90,7 +94,7 @@ public class HouseDetailController {
         return new NetResponse("FAIL");
     }
 
-    @GetMapping("/delComment")
+    @RequestMapping("/delComment")
     @ResponseBody
     public NetResponse delComment(@RequestParam("commentId") String commentId) {
         int result = commentService.delComment(commentId);
@@ -99,6 +103,35 @@ public class HouseDetailController {
         }
         return new NetResponse("FAIL");
     }
+
+    @PostMapping("/comment/myComment")
+    @ResponseBody
+    public CommentHouseData findMyComment(int page, int limit, HttpServletRequest request) {
+        Page pageObj = new Page();
+        pageObj.setPage((page - 1) * limit);
+        pageObj.setLimit(limit);
+        User user = (User) request.getSession().getAttribute("loginUser");
+        pageObj.setUserId(user.getUserId());
+        CommentHouseData chd = new CommentHouseData();
+        List<CommentHouse> commentHouses = service.findMyComment(pageObj);
+        int count = service.getMyCommentCount(user.getUserId());
+        chd.setCode(0);
+        chd.setCount(count);
+        chd.setData(commentHouses);
+        chd.setMsg("200");
+        return chd;
+    }
+
+    @PostMapping("/comment/deleteComment")
+    @ResponseBody
+    public String deleteCommentPost(@RequestParam("commentId") String commentId) {
+        int result = commentService.delComment(commentId);
+        if (result > 0) {
+            return "OK";
+        }
+        return "FAIL";
+    }
+
 
     @GetMapping("/collect")
     @ResponseBody

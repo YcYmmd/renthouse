@@ -60,6 +60,8 @@ public class HomeController {
     ) {
         PageInfo<House> pageInfo = service.getPageInfo(keywords, pageNum, pageSize);
         modelMap.addAttribute("pageInfo", pageInfo);
+        modelMap.addAttribute("isAsc",false);
+        modelMap.addAttribute("isDesc",false);
         return "index/index_house.jsp";
     }
 
@@ -69,7 +71,7 @@ public class HomeController {
      * @param request request
      * @return res
      */
-    @GetMapping("/priceAsc")
+    @RequestMapping("/priceAsc")
     public String findPriceAsc(HttpServletRequest request,
                                @RequestParam(value = "keyword", defaultValue = "") String keywords,
                                @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
@@ -78,6 +80,8 @@ public class HomeController {
     ) {
         PageInfo<House> pageInfo = service.getPageInfoAsc(keywords,pageNum,pageSize);
         modelMap.addAttribute("pageInfo",pageInfo);
+        modelMap.addAttribute("isAsc",true);
+        modelMap.addAttribute("isDesc",false);
         return "index/index_house.jsp";
     }
 
@@ -87,7 +91,7 @@ public class HomeController {
      * @param request request
      * @return res
      */
-    @GetMapping("/priceDesc")
+    @RequestMapping("/priceDesc")
     public String findPriceDesc(HttpServletRequest request,
                                 @RequestParam(value = "keyword", defaultValue = "") String keywords,
                                 @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
@@ -96,6 +100,8 @@ public class HomeController {
     ) {
         PageInfo<House> pageInfo = service.getPageInfoDesc(keywords,pageNum,pageSize);
         modelMap.addAttribute("pageInfo",pageInfo);
+        modelMap.addAttribute("isAsc",false);
+        modelMap.addAttribute("isDesc",true);
         return "index/index_house.jsp";
     }
     @RequestMapping("/page1")

@@ -81,6 +81,16 @@ public class UserController {
     public String userCollection(HttpServletRequest request) {
         return "user/userCollection.jsp";
     }
+
+    /**
+     * 我的评论页面
+     * @param request
+     * @return
+     */
+    @GetMapping("/userComment.html")
+    public String userComment(HttpServletRequest request) {
+        return "/user/myComment.jsp";
+    }
     /**
      * 用户更新房源信息
      * 使用的也是管理员的界面

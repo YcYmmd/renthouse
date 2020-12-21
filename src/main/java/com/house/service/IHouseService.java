@@ -3,6 +3,8 @@ package com.house.service;
 import java.util.List;
 
 import com.github.pagehelper.PageInfo;
+import com.house.dto.CommentHouse;
+import com.house.dto.CommentHouseData;
 import com.house.entity.House;
 import com.house.entity.Page;
 
@@ -80,4 +82,8 @@ public interface IHouseService {
     PageInfo<House> getPageInfoAsc(String keywords, Integer pageNum, Integer pageSize);
 
     PageInfo<House> getPageInfoDesc(String keywords, Integer pageNum, Integer pageSize);
+
+    List<CommentHouse> findMyComment(Page pageObj);
+
+    int getMyCommentCount(int userId);
 }

@@ -58,6 +58,7 @@
                     <dd><a href="${pageContext.request.contextPath}/house/addHouse.html" target="iframe">发布房源信息</a></dd>
                     <dd><a href="${pageContext.request.contextPath}/user/userRental.html" target="iframe">我发布的信息</a></dd>
                     <dd><a href="${pageContext.request.contextPath}/user/userCollection.html" target="iframe">我的收藏</a></dd>
+                    <dd><a href="${pageContext.request.contextPath}/user/userComment.html" target="iframe">我的评论</a></dd>
                 </dl>
             </li>
         </ul>

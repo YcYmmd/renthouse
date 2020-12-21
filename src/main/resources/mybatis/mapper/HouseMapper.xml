@@ -153,24 +153,23 @@
     </select>
 
 
-    <select id="findHouseOrderByDesc" resultMap="BasicMap">
-        SELECT *
-        FROM t_house h
-        where house_examine = 1
-        ORDER BY house_price DESC;
-    </select>
-
-    <select id="findHouseOrderByAsc" resultMap="BasicMap">
-        SELECT *
-        FROM t_house h
-        where house_examine = 1
-        ORDER BY house_price;
-    </select>
+   <select id="findMyComment" resultType="com.house.dto.CommentHouse">
+        select id commentId,comment_content commentContent,house_id commentHouseId,house_desc commentHouse
+        from t_comment,t_house
+        where t_comment.user_id = #{page.userId} and t_comment.house_id = t_house.h_id
+        limit #{page.page},#{page.limit};
+   </select>
 
     <select id="getBriefImageByHouseId" resultType="java.lang.String">
         select house_image
         from t_house
         where h_id = #{houseId};
+    </select>
+
+    <select id="getMyCommentCount" resultType="java.lang.Integer">
+        select count(*)
+        from t_comment
+        where user_id = #{userId};
     </select>
 
     <select id="getDetailImagesByHouseId" resultType="java.lang.String">
