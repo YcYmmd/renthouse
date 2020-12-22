@@ -64,7 +64,7 @@ public class OrderController {
     }
 
     /**
-     * 查询我的所有收藏房源信息
+     * 查询我的所有预定的房源信息
      *
      * @param page    page
      * @param limit   limit

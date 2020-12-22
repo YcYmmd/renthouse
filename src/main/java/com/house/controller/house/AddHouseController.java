@@ -39,7 +39,6 @@ public class AddHouseController {
 
     /**
      * 添加房源界面
-     *
      * @return view
      */
     @GetMapping("/addHouse.html")
